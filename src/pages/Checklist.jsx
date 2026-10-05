@@ -9,14 +9,54 @@ function Checklist() {
     removeFromList,
   } = useBridalList();
 
-  const total = list.reduce(
-    (sum, product) =>
-      sum + Number(product.price || 0),
-    0
-  );
+  // ==========================================
+  // SEND REQUEST TO WHATSAPP
+  // ==========================================
+
+  function handleSendRequest() {
+    const phoneNumber = "96171523197";
+
+    const message =
+      language === "en"
+        ? `Hello! I would like to request the following bridal items:
+
+${list
+  .map(
+    (product) => `🛍️ ${product.name_en}
+🖼️ Image: ${product.image_url}`
+  )
+  .join("\n\n")}
+
+Thank you!`
+        : `مرحباً! أريد طلب المنتجات التالية:
+
+${list
+  .map(
+    (product) => `🛍️ ${product.name_ar}
+🖼️ الصورة: ${product.image_url}`
+  )
+  .join("\n\n")}
+
+شكراً لكم!`;
+
+    window.open(
+      `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+        message
+      )}`,
+      "_blank"
+    );
+  }
+
+  // ==========================================
+  // PAGE
+  // ==========================================
 
   return (
     <main className="checklist-page">
+
+      {/* ========================================
+          HEADER
+      ======================================== */}
 
       <div className="checklist-header">
 
@@ -33,6 +73,10 @@ function Checklist() {
         </p>
 
       </div>
+
+      {/* ========================================
+          EMPTY LIST
+      ======================================== */}
 
       {list.length === 0 ? (
 
@@ -52,6 +96,10 @@ function Checklist() {
 
         <>
 
+          {/* ====================================
+              PRODUCTS
+          ==================================== */}
+
           <div className="checklist-products">
 
             {list.map((product) => {
@@ -67,10 +115,14 @@ function Checklist() {
                   key={product.id}
                 >
 
+                  {/* PRODUCT IMAGE */}
+
                   <img
                     src={product.image_url}
                     alt={productName}
                   />
+
+                  {/* PRODUCT INFO */}
 
                   <div className="checklist-info">
 
@@ -78,15 +130,19 @@ function Checklist() {
                       {productName}
                     </h3>
 
-                    <p>
-                      ${product.price}
-                    </p>
-
                   </div>
 
+                  {/* REMOVE BUTTON */}
+
                   <button
+                    type="button"
                     onClick={() =>
                       removeFromList(product.id)
+                    }
+                    aria-label={
+                      language === "en"
+                        ? "Remove product"
+                        : "إزالة المنتج"
                     }
                   >
                     ✕
@@ -98,58 +154,33 @@ function Checklist() {
 
           </div>
 
+          {/* ====================================
+              REQUEST SECTION
+          ==================================== */}
+
           <div className="checklist-summary">
 
             <h2>
               {language === "en"
-                ? "Estimated Total"
-                : "المجموع التقريبي"}
+                ? "Ready to send your list?"
+                : "جاهزة لإرسال قائمتك؟"}
             </h2>
 
-            <h1>
-              ${total.toFixed(2)}
-            </h1>
+            <p>
+              {language === "en"
+                ? "Send your selected items directly to our store on WhatsApp."
+                : "أرسلي المنتجات التي اخترتها مباشرةً إلى المحل عبر واتساب."}
+            </p>
 
-<button
-  className="request-button"
-  onClick={() => {
-    const phoneNumber = "96171523197"; 
-
-    const message =
-      language === "en"
-        ? `Hello! I would like to request the following bridal items:
-
-${list
-  .map(
-    (product) => `🛍️ ${product.name_en}
-💰 Price: $${product.price}
-🖼️ Image: ${product.image_url}`
-  )
-  .join("\n\n")}
-
-💵 Estimated Total: $${total.toFixed(2)}`
-        : `مرحباً! أريد طلب المنتجات التالية:
-
-${list
-  .map(
-    (product) => `🛍️ ${product.name_ar}
-💰 السعر: $${product.price}
-🖼️ الصورة: ${product.image_url}`
-  )
-  .join("\n\n")}
-
-💵 المجموع التقريبي: $${total.toFixed(2)}`;
-
-    window.open(
-      `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,
-      "_blank"
-    );
-  }}
->
-  {language === "en"
-    ? "Send Request To Store"
-    : "إرسال الطلب للمحل"}
-</button>
+            <button
+              type="button"
+              className="request-button"
+              onClick={handleSendRequest}
+            >
+              {language === "en"
+                ? "Send Request To Store"
+                : "إرسال الطلب للمحل"}
+            </button>
 
           </div>
 

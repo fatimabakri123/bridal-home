@@ -408,7 +408,7 @@ function AddProduct() {
           description_ar:
             form.description_ar,
 
-          price: Number(form.price),
+        
 
           category_id:
             Number(form.category_id),
@@ -760,25 +760,7 @@ function AddProduct() {
 
             {/* Price */}
 
-            <label>
-              Price
-            </label>
-
-            <input
-              type="number"
-              name="price"
-              value={
-                form.price
-              }
-              onChange={
-                handleChange
-              }
-              placeholder="120"
-              min="0"
-              step="0.01"
-              required
-            />
-
+           
             {/* Category */}
 
             <label>

@@ -56,7 +56,6 @@ function AdminProducts() {
           name_ar,
           description_en,
           description_ar,
-          price,
           image_url,
           available,
           category_id,
@@ -73,10 +72,7 @@ function AdminProducts() {
         });
 
       if (productsError) {
-        console.error(
-          "Products error:",
-          productsError
-        );
+        console.error("Products error:", productsError);
 
         setError("Could not load products.");
         setLoading(false);
@@ -267,9 +263,6 @@ function AdminProducts() {
 
       description_ar:
         product.description_ar || "",
-
-      price:
-        product.price || "",
 
       image_url:
         product.image_url || "",
@@ -472,7 +465,6 @@ function AdminProducts() {
         name_ar,
         description_en,
         description_ar,
-        price,
         image_url,
         available,
         category_id,
@@ -521,9 +513,6 @@ function AdminProducts() {
           name_ar,
           description_en,
           description_ar,
-
-          price:
-            Number(price),
 
           image_url:
             finalMainImageUrl,
@@ -1108,10 +1097,6 @@ function AdminProducts() {
                       </p>
                     )}
 
-                    <strong>
-                      ${product.price}
-                    </strong>
-
                     {/* AVAILABILITY */}
 
                     <p
@@ -1349,32 +1334,6 @@ function AdminProducts() {
                     }
                     rows="3"
                     dir="rtl"
-                  />
-
-                </div>
-
-                {/* ==================================
-                    PRICE
-                ================================== */}
-
-                <div className="form-group">
-
-                  <label>
-                    Price
-                  </label>
-
-                  <input
-                    type="number"
-                    name="price"
-                    value={
-                      editingProduct.price
-                    }
-                    onChange={
-                      handleEditChange
-                    }
-                    min="0"
-                    step="0.01"
-                    required
                   />
 
                 </div>

@@ -83,7 +83,9 @@ function Category() {
       error: categoryError,
     } = await supabase
       .from("categories")
-      .select("id, name_en, name_ar, image_url")
+      .select(
+        "id, name_en, name_ar, image_url"
+      )
       .eq("id", categoryId)
       .maybeSingle();
 
@@ -121,28 +123,28 @@ function Category() {
     // ==========================================
     // GET PRODUCTS FOR THIS CATEGORY
     // ==========================================
-const {
-  data: productsData,
-  error: productsError,
-} = await supabase
-  .from("products")
-  .select(`
-    id,
-    name_en,
-    name_ar,
-    description_en,
-    description_ar,
-    price,
-    image_url,
-    available,
-    category_id,
-    subcategory,
-    created_at
-  `)
-  .eq("category_id", categoryData.id)
-  .order("created_at", {
-    ascending: false,
-  });
+
+    const {
+      data: productsData,
+      error: productsError,
+    } = await supabase
+      .from("products")
+      .select(`
+        id,
+        name_en,
+        name_ar,
+        description_en,
+        description_ar,
+        image_url,
+        available,
+        category_id,
+        subcategory,
+        created_at
+      `)
+      .eq("category_id", categoryData.id)
+      .order("created_at", {
+        ascending: false,
+      });
 
     if (productsError) {
       console.error(
@@ -168,7 +170,9 @@ const {
   // ==========================================
 
   const subcategories =
-    categorySubcategories[category?.name_en] || [];
+    categorySubcategories[
+      category?.name_en
+    ] || [];
 
   // ==========================================
   // FILTER PRODUCTS
@@ -213,7 +217,6 @@ const {
       ======================================== */}
 
       <div className="category-page-header">
-
         <h1>
           {loading
             ? language === "en"
@@ -231,7 +234,6 @@ const {
               : "اكتشفي مجموعتنا من المنتجات."}
           </p>
         )}
-
       </div>
 
       {/* ========================================
@@ -292,15 +294,12 @@ const {
       ======================================== */}
 
       {loading ? (
-
         <div className="empty-category">
-
           <p>
             {language === "en"
               ? "Loading products..."
               : "جاري تحميل المنتجات..."}
           </p>
-
         </div>
 
       ) : filteredProducts.length > 0 ? (
@@ -329,13 +328,11 @@ const {
         ====================================== */
 
         <div className="empty-category">
-
           <p>
             {language === "en"
               ? "No products found."
               : "لا توجد منتجات في هذا القسم."}
           </p>
-
         </div>
 
       )}

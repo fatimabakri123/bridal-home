@@ -44,7 +44,6 @@ function ProductDetails() {
           name_ar,
           description_en,
           description_ar,
-          price,
           image_url,
           available,
           category_id,
@@ -106,7 +105,10 @@ function ProductDetails() {
       // Additional images
       if (productImages) {
         productImages.forEach((image) => {
-          if (image.image_url !== productData.image_url) {
+          if (
+            image.image_url !==
+            productData.image_url
+          ) {
             allImages.push(image);
           }
         });
@@ -115,10 +117,14 @@ function ProductDetails() {
       setImages(allImages);
       setCurrentImage(0);
     } catch (err) {
-      console.error("Product details error:", err);
+      console.error(
+        "Product details error:",
+        err
+      );
 
       setError(
-        err.message || "Could not load product."
+        err.message ||
+          "Could not load product."
       );
     } finally {
       setLoading(false);
@@ -321,7 +327,11 @@ function ProductDetails() {
                 type="button"
                 className="gallery-arrow gallery-arrow-left"
                 onClick={previousImage}
-                aria-label="Previous image"
+                aria-label={
+                  language === "en"
+                    ? "Previous image"
+                    : "الصورة السابقة"
+                }
               >
                 ‹
               </button>
@@ -334,7 +344,11 @@ function ProductDetails() {
                 type="button"
                 className="gallery-arrow gallery-arrow-right"
                 onClick={nextImage}
-                aria-label="Next image"
+                aria-label={
+                  language === "en"
+                    ? "Next image"
+                    : "الصورة التالية"
+                }
               >
                 ›
               </button>
@@ -422,12 +436,6 @@ function ProductDetails() {
 
           <h1>{name}</h1>
 
-          {/* PRICE */}
-
-          <div className="product-details-price">
-            ${product.price}
-          </div>
-
           {/* DESCRIPTION */}
 
           {description && (
@@ -465,7 +473,9 @@ function ProductDetails() {
           <button
             type="button"
             className="add-to-bridal-list"
-            onClick={handleAddToBridalList}
+            onClick={
+              handleAddToBridalList
+            }
             disabled={!product.available}
           >
             <span className="add-icon">

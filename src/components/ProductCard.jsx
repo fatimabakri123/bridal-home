@@ -58,6 +58,7 @@ function ProductCard({ product }) {
       {/* INFO */}
       <div className="product-info">
 
+        {/* CATEGORY */}
         <p className="product-category">
           {categoryName ||
             (language === "en"
@@ -65,19 +66,18 @@ function ProductCard({ product }) {
               : "بدون قسم")}
         </p>
 
+        {/* PRODUCT NAME */}
         <h3>
           {name}
         </h3>
 
+        {/* DESCRIPTION */}
         <p className="product-description">
           {description}
         </p>
 
+        {/* BUTTON */}
         <div className="product-bottom">
-
-          <span className="product-price">
-            ${product.price}
-          </span>
 
           <Link
             to={`/product/${product.id}`}
