@@ -1,8 +1,14 @@
-
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 
+import IntroPage from "./pages/IntroPage";
 import RolePage from "./pages/RolePage";
 import Home from "./pages/Home";
 import Categories from "./pages/Categories";
@@ -28,32 +34,26 @@ function About() {
 function AppContent() {
   const location = useLocation();
 
-  // Hide Navbar on the role selection page
-  const hideNavbar = location.pathname === "/";
+  const hideNavbar =
+    location.pathname === "/" ||
+    location.pathname === "/role";
 
   return (
     <>
       {!hideNavbar && <Navbar />}
 
       <Routes>
+        {/* INTRO VIDEO */}
+        <Route path="/" element={<IntroPage />} />
 
-        {/* FIRST PAGE */}
-        <Route
-          path="/"
-          element={<RolePage />}
-        />
+        {/* ROLE SELECTION */}
+        <Route path="/role" element={<RolePage />} />
 
         {/* CUSTOMER HOME */}
-        <Route
-          path="/home"
-          element={<Home />}
-        />
+        <Route path="/home" element={<Home />} />
 
         {/* CATEGORIES */}
-        <Route
-          path="/categories"
-          element={<Categories />}
-        />
+        <Route path="/categories" element={<Categories />} />
 
         {/* SINGLE CATEGORY */}
         <Route
@@ -61,29 +61,20 @@ function AppContent() {
           element={<Category />}
         />
 
-        {/* PRODUCT */}
+        {/* PRODUCT DETAILS */}
         <Route
           path="/product/:id"
           element={<ProductDetails />}
         />
 
         {/* CHECKLIST */}
-        <Route
-          path="/checklist"
-          element={<Checklist />}
-        />
+        <Route path="/checklist" element={<Checklist />} />
 
         {/* OFFERS */}
-        <Route
-          path="/offers"
-          element={<Offers />}
-        />
+        <Route path="/offers" element={<Offers />} />
 
         {/* ABOUT */}
-        <Route
-          path="/about"
-          element={<About />}
-        />
+        <Route path="/about" element={<About />} />
 
         {/* ADMIN LOGIN */}
         <Route
@@ -121,15 +112,27 @@ function AppContent() {
           }
         />
 
+        {/* ADMIN CATEGORIES */}
+        <Route
+          path="/admin/categories"
+          element={
+            <ProtectedAdminRoute>
+              <AdminCategories />
+            </ProtectedAdminRoute>
+          }
+        />
+
         {/* OWNER LOGIN */}
         <Route
           path="/owner/login"
           element={<div>Owner Login</div>}
         />
-<Route
-  path="/admin/categories"
-  element={<AdminCategories />}
-/>
+
+        {/* UNKNOWN ROUTES */}
+        <Route
+          path="*"
+          element={<Navigate to="/" replace />}
+        />
       </Routes>
     </>
   );
@@ -144,4 +147,3 @@ function App() {
 }
 
 export default App;
-

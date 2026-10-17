@@ -108,7 +108,7 @@ const [mobileContactOpen, setMobileContactOpen] = useState(false);
           onClick={closeMenu}
         >
           <img
-            src="/image/logo.jpg"
+            src="/image/logo.png"
             alt="Ghaith Home"
             className="logo-image"
           />

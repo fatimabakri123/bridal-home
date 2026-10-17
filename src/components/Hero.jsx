@@ -24,7 +24,7 @@ function Hero() {
 
       <div className="hero-image">
         <img
-          src="/image/ghaith-home-hero.jpg"
+          src="/image/ghaith-home-hero.jpeg"
           alt="Beautiful kitchen"
         />
       </div>

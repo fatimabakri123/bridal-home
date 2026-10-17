@@ -1,0 +1,34 @@
+
+
+.intro-page {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  background: #faf6f2;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.intro-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.skip-intro {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  padding: 12px 22px;
+  border: 1px solid #caa574;
+  border-radius: 30px;
+  background: #fffdfb;
+  color: #9d7050;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.skip-intro:hover {
+  background: #f5e8d9;
+}
