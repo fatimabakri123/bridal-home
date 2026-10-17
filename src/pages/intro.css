@@ -1,34 +1,174 @@
 
+/* ==========================
+   GHAITH HOME - INTRO VIDEO
+========================== */
 
 .intro-page {
   position: fixed;
   inset: 0;
   width: 100%;
+  height: 100vh;
   height: 100dvh;
-  background: #faf6f2;
   overflow: hidden;
+  background: #faf6f2;
   z-index: 9999;
+  isolation: isolate;
 }
 
+/* Full-screen video */
 .intro-video {
+  position: absolute;
+  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
+  background: #faf6f2;
 }
 
+/* Brand name */
+.intro-brand {
+  position: absolute;
+  top: max(24px, env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+
+  width: calc(100% - 32px);
+  color: #fffdfb;
+  font-family: inherit;
+  font-size: clamp(18px, 3vw, 34px);
+  font-weight: 600;
+  letter-spacing: clamp(2px, 0.5vw, 5px);
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+/* Skip button */
 .skip-intro {
   position: absolute;
-  bottom: 28px;
-  right: 28px;
-  padding: 12px 22px;
+  right: max(24px, env(safe-area-inset-right));
+  bottom: max(24px, env(safe-area-inset-bottom));
+  z-index: 3;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 44px;
+  padding: 12px 23px;
+
   border: 1px solid #caa574;
   border-radius: 30px;
-  background: #fffdfb;
+
+  background: rgba(255, 253, 251, 0.96);
   color: #9d7050;
-  cursor: pointer;
+
+  font-family: inherit;
   font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .skip-intro:hover {
   background: #f5e8d9;
+  transform: translateY(-2px);
+}
+
+.skip-intro:focus-visible {
+  outline: 2px solid #9d7050;
+  outline-offset: 4px;
+}
+
+/* ==========================
+   TABLETS
+========================== */
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .intro-video {
+    object-position: center center;
+  }
+
+  .intro-brand {
+    top: 30px;
+  }
+
+  .skip-intro {
+    right: 28px;
+    bottom: 28px;
+  }
+}
+
+/* ==========================
+   MOBILE PHONES
+========================== */
+
+@media (max-width: 600px) {
+  .intro-page {
+    height: 100vh;
+    height: 100dvh;
+    height: -webkit-fill-available;
+  }
+
+  .intro-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .intro-brand {
+    top: max(20px, env(safe-area-inset-top));
+    width: calc(100% - 24px);
+    font-size: clamp(17px, 5vw, 23px);
+    letter-spacing: 2.5px;
+  }
+
+  .skip-intro {
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(18px, env(safe-area-inset-bottom));
+
+    min-height: 44px;
+    padding: 11px 19px;
+    font-size: 13px;
+  }
+}
+
+/* ==========================
+   SMALL MOBILE PHONES
+========================== */
+
+@media (max-width: 360px) {
+  .intro-brand {
+    top: max(16px, env(safe-area-inset-top));
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  .skip-intro {
+    right: 12px;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .skip-intro {
+    transition: none;
+  }
 }
